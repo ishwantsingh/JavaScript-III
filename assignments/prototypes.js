@@ -7,9 +7,9 @@
   
   Each constructor function has unique properites and methods that are defined in their block comments below:
 */
-  function GameObject(time, size) {
-    this.createdAt = time;
-    this.dimensions = size;
+  function GameObject(value) {
+    this.createdAt = value.createdAt;
+    this.dimensions = value.dimensions;
   }
 
   GameObject.prototype.destroy = function() {
@@ -21,11 +21,18 @@
   * dimensions
   * destroy() // prototype method -> returns the string: 'Object was removed from the game.'
 */
-function CharacterStats(hp,name) {
-  this.hp = hp;
-  this.name = name;
+function CharacterStats(attributes) {
+  this.hp = attributes.hp;
+  this.name = attributes.name;
+// inherit
+  GameObject.call(this,attributes)
 }
-GameObject.prototype.call()
+CharacterStats.prototype = Object.create(GameObject.prototype);
+
+CharacterStats.prototype.takeDamage = function() {
+  return `${this.name} took damage.`
+}
+
 /*
   === CharacterStats ===
   * hp
@@ -33,7 +40,18 @@ GameObject.prototype.call()
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
+function Humanoid(input) {
+  this.faction = input.faction;
+  this.weapons = input.weapons;
+  this.language = input.language;
+  //inherit
+  CharacterStats.call(this,input)
+}
+Humanoid.prototype = Object.create(CharacterStats.prototype);
 
+Humanoid.prototype.greet = function() {
+  return `${this.name} offers a greeting in ${this.language}.`;
+}
 /*
   === Humanoid ===
   * faction
