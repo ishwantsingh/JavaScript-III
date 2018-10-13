@@ -7,14 +7,25 @@
   
   Each constructor function has unique properites and methods that are defined in their block comments below:
 */
-  
+  function GameObject(time, size) {
+    this.createdAt = time;
+    this.dimensions = size;
+  }
+
+  GameObject.prototype.destroy = function() {
+    return 'Object was removed from the game';
+  }
 /*
   === GameObject ===
   * createdAt
   * dimensions
   * destroy() // prototype method -> returns the string: 'Object was removed from the game.'
 */
-
+function CharacterStats(hp,name) {
+  this.hp = hp;
+  this.name = name;
+}
+GameObject.prototype.call()
 /*
   === CharacterStats ===
   * hp
